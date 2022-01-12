@@ -8,22 +8,18 @@ contract Example {
 
     event LogErrorString(string message);
 
-    constructor (uint256 _p) {
-        value = _p;
-    }
-
-    // function setStr(string memory a) public {
-    //     str = a;
-    // }
-
-    function setPublicKey(string memory uniqueKeyParam) public{
+    constructor (string memory uniqueKeyParam) {
         uniqueKey = uniqueKeyParam;
     }
 
-    function isSecretKeyGood(string memory matchUniqueKeyParam)view public returns (bool){
-        // basic validaion - secret key is already set
-        require (keccak256(abi.encodePacked(uniqueKey)) != keccak256(abi.encodePacked("")), "secret key is missing");
+    // function setPublicKey(string memory uniqueKeyParam) public{
+    //     uniqueKey = uniqueKeyParam;
+    // }
 
+    function IsSecretKeyGood(string memory matchUniqueKeyParam)view public returns (bool){
+        // basic validaion - secret key is already set
+        require (keccak256(abi.encodePacked(uniqueKey)) != keccak256(abi.encodePacked("")), "Secret key is not yet set");
+        require (keccak256(abi.encodePacked(matchUniqueKeyParam)) != keccak256(abi.encodePacked("")), "Secret key is missing");
         // check with the set secret key
         require(keccak256(abi.encodePacked(uniqueKey)) == keccak256(abi.encodePacked(matchUniqueKeyParam)), "The secret code does not match!");
 
