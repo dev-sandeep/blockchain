@@ -5,17 +5,28 @@ contract Example {
 
     uint256 value;
     string uniqueKey = "";
+    address buyer;
+    address seller;
 
     event LogErrorString(string message);
 
-    constructor (string memory uniqueKeyParam) {
+    constructor (string memory uniqueKeyParam, address _buyer, address _seller) {
         uniqueKey = uniqueKeyParam;
+        buyer = _buyer;
+        seller = _seller;
     }
 
-    // function setPublicKey(string memory uniqueKeyParam) public{
-    //     uniqueKey = uniqueKeyParam;
-    // }
+    modifier onlyBuyer() {
+        require(msg.sender == buyer, "Only buyer can call this method");
+        _;
+    }
+    
+    modifier onlySeller() {
+        require(msg.sender == seller, "Only buyer can call this method");
+        _;
+    }
 
+    // Responsible for verifying that the passed secret key is good
     function IsSecretKeyGood(string memory matchUniqueKeyParam)view public returns (bool){
         // basic validaion - secret key is already set
         require (keccak256(abi.encodePacked(uniqueKey)) != keccak256(abi.encodePacked("")), "Secret key is not yet set");
@@ -25,6 +36,18 @@ contract Example {
 
         return true;
     }
+
+    function SellerCall() view public onlySeller returns (bool){
+        return true;
+    }
+
+    function BuyerCall() view public onlyBuyer returns (bool){
+        return true;
+    }
+
+    // function setPublicKey(string memory uniqueKeyParam) public{
+    //     uniqueKey = uniqueKeyParam;
+    // }
 
     //   function validateSecretCode(string memory codeA, string memory codeB) private returns (bool isEqual)
     // {
