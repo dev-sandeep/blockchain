@@ -16,6 +16,8 @@ contract Example {
         seller = _seller;
     }
 
+    event LogUint(string, uint);
+
     modifier onlyBuyer() {
         require(msg.sender == buyer, "Only buyer can call this method");
         _;
@@ -45,6 +47,18 @@ contract Example {
         return true;
     }
 
+    // responsible for sending tokens to the seller
+    function TransferFromBuyerTSeller() payable public onlyBuyer{
+        payable(seller).transfer(address(this).balance);
+    }
+    
+    function TransferFromSellerToBuyer() payable public onlySeller{
+        payable(buyer).transfer(address(this).balance);
+    }
+
+    function GetBalance() view public returns (uint balance){
+        balance = address(msg.sender).balance;
+    }
     // function setPublicKey(string memory uniqueKeyParam) public{
     //     uniqueKey = uniqueKeyParam;
     // }
