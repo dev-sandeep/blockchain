@@ -9,6 +9,9 @@ contract Example {
     address seller;
 
     event LogErrorString(string message);
+    enum State { Created, Locked, Release, Inactive }
+    // The state variable has a default value of the first member, `State.created`
+    State public state;
 
     constructor (string memory uniqueKeyParam, address _buyer, address _seller) {
         uniqueKey = uniqueKeyParam;
@@ -25,6 +28,11 @@ contract Example {
     
     modifier onlySeller() {
         require(msg.sender == seller, "Only buyer can call this method");
+        _;
+    }
+
+   modifier inState(State state_) {
+       require(state == state_);
         _;
     }
 
@@ -58,6 +66,18 @@ contract Example {
 
     function GetBalance() view public returns (uint balance){
         balance = address(msg.sender).balance;
+    }
+
+    function LockState() public {
+        state = State.Locked;
+    }
+
+    function CheckIfState() public inState(State.Locked){
+        emit LogErrorString("Looks good");
+    }
+
+    function AddWrongState() public {
+        state = State.Created;
     }
     // function setPublicKey(string memory uniqueKeyParam) public{
     //     uniqueKey = uniqueKeyParam;
