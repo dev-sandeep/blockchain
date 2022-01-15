@@ -10,3 +10,6 @@ _PreBuyerDeposit() and also, buyer have the item.
 Next, following methods are called in the following order - 
 
 <img src="Screenshot 2022-01-15 at 11.14.08 PM.png" width="1280"/>
+
+# How to run
+Visit https://remix.ethereum.org/ and run Retun.sol
