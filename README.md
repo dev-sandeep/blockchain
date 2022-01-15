@@ -9,4 +9,4 @@ A typical workflow for return would consider that buyer have deposited some(ment
 _PreBuyerDeposit() and also, buyer have the item. 
 Next, following methods are called in the following order - 
 
-<img src="Screenshot 2022-01-15 at 11.14.08 PM.png" width="128"/>
+<img src="Screenshot 2022-01-15 at 11.14.08 PM.png" width="1280"/>
