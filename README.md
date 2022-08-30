@@ -1,4 +1,4 @@
-# Solidity Contract for the return process in p2p e-commerce.
+# Solidity Contract for the return process in p2p e-commerce - 
 The Return.sol explains various methods called by different stakeholders of a p2p e-commerce return process, like - 
 1. Buyer, 2. Seller, 3. Logistic Team, 4. Mediator
 
